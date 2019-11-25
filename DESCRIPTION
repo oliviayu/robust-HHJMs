@@ -1,0 +1,16 @@
+Package: rHHJMs
+Title: Robust H-likelihood based Hierarchical Joint Models
+Version: 0.1
+Authors@R: person("Tingting", "Yu", email = "yue.live520@gmail.com",
+                  role = c("aut", "cre"))
+Description: Fit robust joint models of longitudinal and survival data.
+Depends: R (>= 3.5.3)
+Imports:
+  Deriv (>= 3.9.0),
+  matrixcalc (>= 1.0-3),
+  lbfgs (>= 1.2.1),
+  parallel (>= 3.5.3),
+  nleqslv (>= 3.3.2),
+  magrittr
+Suggests:
+RoxygenNote: 6.1.1
