@@ -4,16 +4,24 @@ library(expm)
 library(truncnorm)
 
 simulate_data <- function(n=200, 
+                          # model parameters
                           alpha, beta, eta, Asso, lambda, sigma,
+                          # names of predictors in Z- and Y-models
                           ZX=c('month','sindoes','doesW', 'trb1'), 
                           YX=c("year",'year2','sindoes'),
+                          # random effects in the models
+                          ran_p=c(1,1), SIGMA=diag(c(1, 1)),
+                          # parameters for generating survival data
+                          scale=800, shape=15, cen_par=c(5, 1000),
+                          # parameters for generating left-censored data
+                          delim_val=1.47, regime=1,
+                          # parameters for generating outliers
+                          contaminated=F, percent=0, k_sd=3,
+                          outlier_type=c("e-outlier", "b-outlier", "both"),
+                          # vaccination times and length of study
                           Vtime=c(0,1,6,12,18,24,30), endTrial=36,
-                          scale=800, shape=15,
-                          ran_p=c(1,1), SIGMA=diag(c(1, 1)), 
-                          cen_par=c(5,1000), check=F, delim_val=1.47,
-                          regime=1, freq=T, rate=0.2, contaminated=F,
-                          percent=0, fixbase = NULL, k_sd=3,
-                          outlier_type=c("e-outlier","b-outlier","both")
+                          # others
+                          check=F
                           ){
   
   t <- 1:(endTrial*30)
@@ -23,13 +31,9 @@ simulate_data <- function(n=200,
   
   ni <- length(t)
   sid <- rep(1:n, each=ni)
-  if(is.null(fixbase)){
-    smpbase <- rnorm(n, 0, 1)
-    base <- rep(scale(smpbase), each=ni)
-  } else{
-    base <- rep(fixbase, each=ni)
-  }
-  
+  smpbase <- rnorm(n, 0, 1)
+  base <- rep(scale(smpbase), each=ni)
+
   perdi <- rep(c(pVacc), c(pVacc))
   perd <- rep(perdi, n)  
   time <- rep(t, n)
@@ -130,12 +134,7 @@ simulate_data <- function(n=200,
   for(i in 1:n){
     subdat <- subset(dat, sid==ids[i])
     maxt <- max(subdat$time)
-    if(freq==T){
-      rdays <- seq(16, maxt, by=15)
-    } else {
-      rdays <- c(16, 48, 198,  378, 558, 738, 918, 1080)
-    }
-    
+    rdays <- seq(16, maxt, by=15)
     rdays <- rdays + sample(-2:2, length(rdays), replace = T)
     rdays <- c(rdays, 31, 181, 361, 541, 721, 901)
     keept <- c(1, rdays, maxt)

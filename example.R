@@ -13,12 +13,11 @@ DATA <- simulate_data(n = 100,
                       Asso = c(-1.5, 2), lambda = c(0, -0.75), sigma = 0.5,
                       ZX = c('month','sindoes','doesW', 'trb1'), 
                       YX = c("year",'year2','sindoes'),
-                      Vtime = c(0,1,6,12,18,24,30), endTrial = 36,
-                      scale = 800, shape = 15, ran_p = c(1,1),
-                      SIGMA = matrix(c(1, 0.5, 0.5,1),2,2), 
-                      cen_par = c(5, 1000), check = F, delim_val = 1.47,
-                      regime = 1, freq = T, contaminated = T, percent = 0.05,
-                      outlier_type = "e-outlier", k_sd = 5)
+                      scale = 800, shape = 15, cen_par = c(5, 1000),  
+                      ran_p = c(1,1), SIGMA = matrix(c(1, 0.5, 0.5,1),2,2), 
+                      delim_val = 1.47, regime = 1, 
+                      contaminated = T, percent = 0.05, 
+                      outlier_type = "both", k_sd = 5)
 long.data <- DATA[[1]]
 surv.data <- DATA[[2]]
 
@@ -112,3 +111,4 @@ res <- fitHHJM(glmeObjects, survObject, long.data, surv.data,
                subject_id = "sid",
                randeff_info = list(distribution = "t-dist", degree = 3),
                mcmc_size = 50, burn_in = 100, thin = 5)
+summary(res)

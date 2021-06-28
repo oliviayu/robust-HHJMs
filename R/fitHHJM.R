@@ -5,15 +5,18 @@
 #' The continuous longitudinal data may be left-censored due to lower 
 #' limit of quantification.
 #' @import matrixcalc
-#' @import magrittr
-#' @param glmeObject a list of sublists. Each sublist provides the necessary
-#' information of an LME or GLME model.
+#' @importFrom magrittr %>%
+#' @importFrom tibble add_column
+#' @importFrom dplyr arrange_at
+#' @param glmeObjects a list of sublists. Each sublist provides the necessary
+#' information for defining an LME or GLME model.
 #' @param survObject a list that provides the necessary information of 
 #' a survival model.
 #' @param long.data longitudinal data
 #' @param surv.data survival data
 #' @param subject_id
-#' @param event_time
+#' @param randeff_info distributional assumption for the random effects;
+#' distribution = "t-dist" or "normal"; degree must be given when distribution = "t-dist";
 #' @export
 fitHHJM <- function(glmeObjects, survObject, long.data, surv.data, subject_id,
                     randeff_info = list(distribution = "t-dist", degree = 3),
@@ -201,15 +204,17 @@ fitHHJM <- function(glmeObjects, survObject, long.data, surv.data, subject_id,
     
     # print iterating result
     cat("############## Iteration:", m, "###############","\n")
-    cat("Approximate log likelihood:", new_loglike_value, "\n")
+    cat("Approximate log likelihood:\n") 
+    print(new_loglike_value)
     cat("Estimates of fixed parameters: \n")
-    cat(round(unlist(new_fixed_param), 2), "\n")
+    print(round(unlist(new_fixed_param), 2))
     cat("Estimates of dispersion parameters:\n")
-    cat(round(unlist(new_disp_param), 2), "\n")
-    cat("Average relative changes in fixed parameters:",
-        round(Diff, 3), "\n")
-    cat("Relative change in log likelihood:", likDiff, "\n")
-    cat("##########################################","\n")
+    print(round(unlist(new_disp_param), 2))
+    cat("Average relative changes in fixed parameters:\n")
+    print(round(Diff, 3))
+    cat("Relative change in log likelihood:\n")
+    print(likDiff)
+    cat("###########################################","\n")
     
     fixed_param <- new_fixed_param
     invSIGMA <- new_invSIGMA
@@ -267,6 +272,7 @@ fitHHJM <- function(glmeObjects, survObject, long.data, surv.data, subject_id,
                  RespLog = RespLog,
                  rob_param = names(rob_fixed_param))
   class(output) <- "hhjm"
+  output
 }
 
 
