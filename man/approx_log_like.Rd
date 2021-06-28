@@ -4,8 +4,16 @@
 \alias{approx_log_like}
 \title{Evaluate the approximate log marginal likelihood function}
 \usage{
-approx_log_like(RespLog, par_val, long.data, surv.data, Bi, invSIGMA,
-  distribution, degree)
+approx_log_like(
+  RespLog,
+  par_val,
+  long.data,
+  surv.data,
+  Bi,
+  invSIGMA,
+  distribution,
+  degree
+)
 }
 \description{
 Evaluate the approximate log marginal likelihood function

@@ -5,9 +5,22 @@
 \title{Estimates the dispersion parameters in the joint models, 
 by maximizing the adjusted profile h-likelihood function.}
 \usage{
-est_disp(param, invSIGMA, other_param, RespLog, deriv_vars, long.data,
-  surv.data, Bi, Lval0 = NULL, lower, upper, distribution = "normal",
-  degree = 0, Silent = T)
+est_disp(
+  param,
+  invSIGMA,
+  other_param,
+  RespLog,
+  deriv_vars,
+  long.data,
+  surv.data,
+  Bi,
+  Lval0 = NULL,
+  lower,
+  upper,
+  distribution = "normal",
+  degree = 0,
+  Silent = T
+)
 }
 \description{
 Estimates the dispersion parameters in the joint models, 

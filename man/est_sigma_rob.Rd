@@ -4,8 +4,17 @@
 \alias{est_sigma_rob}
 \title{Robust estimate of standard error of residual term}
 \usage{
-est_sigma_rob(param, lower = 0, upper = 100, fixed_param,
-  other_param = NULL, model_object, long.data, Bis, Silent)
+est_sigma_rob(
+  param,
+  lower = 0,
+  upper = 100,
+  fixed_param,
+  other_param = NULL,
+  model_object,
+  long.data,
+  Bis,
+  Silent
+)
 }
 \description{
 Robust estimate of standard error of residual term

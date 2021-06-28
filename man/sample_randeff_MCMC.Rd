@@ -4,8 +4,16 @@
 \alias{sample_randeff_MCMC}
 \title{Generate MCMC samples using adaptive Metro_Hastings}
 \usage{
-sample_randeff_MCMC(long.data, surv.data, subject_id, Bi, par_list,
-  mcmc_size, burn_in, thin)
+sample_randeff_MCMC(
+  long.data,
+  surv.data,
+  subject_id,
+  Bi,
+  par_list,
+  mcmc_size,
+  burn_in,
+  thin
+)
 }
 \description{
 Generate MCMC samples using adaptive Metro_Hastings

@@ -13,4 +13,4 @@ Imports:
   nleqslv (>= 3.3.2),
   magrittr
 Suggests:
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.0

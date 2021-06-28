@@ -4,9 +4,19 @@
 \alias{est_randeff}
 \title{Obtain estimates of random effects}
 \usage{
-est_randeff(RespLog, long.data, surv.data, subject_id, random_effects,
-  invSIGMA, par_val, distribution = "normal", degree = 0, Silent = T,
-  scale = T)
+est_randeff(
+  RespLog,
+  long.data,
+  surv.data,
+  subject_id,
+  random_effects,
+  invSIGMA,
+  par_val,
+  distribution = "normal",
+  degree = 0,
+  Silent = T,
+  scale = T
+)
 }
 \description{
 Obtain estimates of random effects

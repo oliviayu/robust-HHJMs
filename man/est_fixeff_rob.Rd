@@ -4,8 +4,16 @@
 \alias{est_fixeff_rob}
 \title{Estimate fixed parameters using robust inference method}
 \usage{
-est_fixeff_rob(param, sigma, other_param, model_object, long.data, Bis,
-  invSIGMA, Silent = TRUE)
+est_fixeff_rob(
+  param,
+  sigma,
+  other_param,
+  model_object,
+  long.data,
+  Bis,
+  invSIGMA,
+  Silent = TRUE
+)
 }
 \description{
 Estimate fixed parameters using robust inference method

@@ -4,8 +4,17 @@
 \alias{eval_Hmat_for_disp}
 \title{Evaluate H matrix}
 \usage{
-eval_Hmat_for_disp(Hmats, par_val, long.data, surv.data, B, Bi, invSIGMA,
-  distribution, degree)
+eval_Hmat_for_disp(
+  Hmats,
+  par_val,
+  long.data,
+  surv.data,
+  B,
+  Bi,
+  invSIGMA,
+  distribution,
+  degree
+)
 }
 \description{
 Evaluate H matrix

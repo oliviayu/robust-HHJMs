@@ -5,8 +5,19 @@
 \title{Estimate s.e. of non-robust fixed parameters,
 using MCEM approximation}
 \usage{
-get_sd_MCEM(param, RespLog, long.data, surv.data, Bis, random_effects,
-  subject_id, other_param, distribution, degree, Silent)
+get_sd_MCEM(
+  param,
+  RespLog,
+  long.data,
+  surv.data,
+  Bis,
+  random_effects,
+  subject_id,
+  other_param,
+  distribution,
+  degree,
+  Silent
+)
 }
 \description{
 Estimate s.e. of non-robust fixed parameters,

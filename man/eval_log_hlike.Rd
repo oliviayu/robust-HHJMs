@@ -4,8 +4,17 @@
 \alias{eval_log_hlike}
 \title{Evaluate log h-likelihood}
 \usage{
-eval_log_hlike(RespLog, par_val, long.data, surv.data, B, Bi, invSIGMA,
-  distribution, degree)
+eval_log_hlike(
+  RespLog,
+  par_val,
+  long.data,
+  surv.data,
+  B,
+  Bi,
+  invSIGMA,
+  distribution,
+  degree
+)
 }
 \description{
 Evaluate log h-likelihood

@@ -4,12 +4,26 @@
 \alias{fitHHJM}
 \title{Fit robust joint model based on h-likelihood}
 \usage{
-fitHHJM(glmeObjects, survObject, long.data, surv.data, subject_id,
+fitHHJM(
+  glmeObjects,
+  survObject,
+  long.data,
+  surv.data,
+  subject_id,
   randeff_info = list(distribution = "t-dist", degree = 3),
-  itertol = 0.001, Ptol = 0.01, iterMax = 10, Silent = T,
-  mcmc_size = 100, burn_in = 100, thin = 20)
+  mcmc_size = 100,
+  burn_in = 100,
+  thin = 20,
+  itertol = 0.001,
+  Ptol = 0.01,
+  iterMax = 10,
+  Silent = T
+)
 }
 \arguments{
+\item{glmeObjects}{a list of sublists. Each sublist provides the necessary
+information for defining an LME or GLME model.}
+
 \item{survObject}{a list that provides the necessary information of 
 a survival model.}
 
@@ -17,8 +31,8 @@ a survival model.}
 
 \item{surv.data}{survival data}
 
-\item{glmeObject}{a list of sublists. Each sublist provides the necessary
-information of an LME or GLME model.}
+\item{randeff_info}{distributional assumption for the random effects;
+distribution = "t-dist" or "normal"; degree must be given when distribution = "t-dist";}
 }
 \description{
 This function is for robust joint modelling of multiple (generalized) 
