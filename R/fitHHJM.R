@@ -15,12 +15,10 @@
 #' @param subject_id
 #' @param event_time
 #' @export
-fitHHJM <- function(glmeObjects, survObject, long.data, surv.data,
-                    subject_id,
+fitHHJM <- function(glmeObjects, survObject, long.data, surv.data, subject_id,
                     randeff_info = list(distribution = "t-dist", degree = 3),
-                    itertol = 1e-3, Ptol = 1e-2, iterMax = 10,
-                    Silent = T, mcmc_size = 100,
-                    burn_in = 100, thin = 20){
+                    mcmc_size = 100, burn_in = 100, thin = 20,
+                    itertol = 1e-3, Ptol = 1e-2, iterMax = 10, Silent = T){
   # get log hlikelihood
   long_config <- lapply(glmeObjects, get_log_density_glm)
   long_log_hlike <- lapply(long_config, function(x){x$log_density}) %>% paste(collapse = "+")
@@ -98,7 +96,7 @@ fitHHJM <- function(glmeObjects, survObject, long.data, surv.data,
                       distribution = randeff_info$distribution,
                       degree = randeff_info$degree,
                       Silent = T, scale = T)
-    print(cov(Bi[, -1]))
+    # print(cov(Bi[, -1]))
     # generate MCMC samples of random effects (adaptive Metro-Hastings)
     par_list <- list(fixed_param = fixed_param,
                      SIGMA = solve(invSIGMA),
@@ -117,7 +115,6 @@ fitHHJM <- function(glmeObjects, survObject, long.data, surv.data,
     rob_fixed_param <- rob_fixed_param_sd <- c()
     rob_disp_param <- c()
     for(model_object in glmeObjects){
-      # TODO: consider other cases: e.g. uncensored robust
       if(!is.null(model_object$robust) & !is.null(model_object$left_censoring)){
         if(model_object$distribution == "normal"){
           param <- c(fixed_param, disp_param) %>%
@@ -143,7 +140,7 @@ fitHHJM <- function(glmeObjects, survObject, long.data, surv.data,
         }
       }
     }
-    cat("robust estimates done ... \n")
+    # cat("robust estimates done ... \n")
     
     # Non-robust estimate of fixed parameters
     param <- fixed_param[!names(fixed_param) %in% names(rob_fixed_param)]
@@ -204,16 +201,14 @@ fitHHJM <- function(glmeObjects, survObject, long.data, surv.data,
     
     # print iterating result
     cat("############## Iteration:", m, "###############","\n")
-    print("Approximate log likelihood:")
-    print(new_loglike_value)
-    print("Estimates of fixed parameters:")
-    print(round(unlist(new_fixed_param), 2))
-    print("Estimates of dispersion parameters:")
-    print(round(unlist(new_disp_param), 2))
-    print("Average relative changes in fixed parameters:")
-    print(round(Diff, 3))
-    print("Relative change in log likelihood:")
-    print(likDiff)
+    cat("Approximate log likelihood:", new_loglike_value, "\n")
+    cat("Estimates of fixed parameters: \n")
+    cat(round(unlist(new_fixed_param), 2), "\n")
+    cat("Estimates of dispersion parameters:\n")
+    cat(round(unlist(new_disp_param), 2), "\n")
+    cat("Average relative changes in fixed parameters:",
+        round(Diff, 3), "\n")
+    cat("Relative change in log likelihood:", likDiff, "\n")
     cat("##########################################","\n")
     
     fixed_param <- new_fixed_param
